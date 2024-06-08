@@ -185,3 +185,9 @@ form button {
 .subreddit-cards li {
   border-radius: 8px;
 }
+.up-vote.active {
+  color:green;
+}
+.down-vote.active {
+  color:red;
+}

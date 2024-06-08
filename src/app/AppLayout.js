@@ -31,7 +31,7 @@ const onSearchTermSubmit = (e) => {
             </div>
                 <form className='search' onSubmit={onSearchTermSubmit}>
                     <input type="text" placeholder='Search' onChange={onSearchTermChange} value={searchTermLocal}/>
-                    <button type='submit' onClick={onSearchTermSubmit}>Submit</button>
+                    <button type='submit' onClick={onSearchTermSubmit}><i class="fa-solid fa-magnifying-glass"></i></button>
                 </form>
         </header>
         <Outlet/>

@@ -5,17 +5,23 @@ import moment from 'moment';
 function PostCard(props) {
   const [voteValue, setVoteValue] = useState(0);
   const {post} = props;
-  
-  const onHandlerVote = (newValue) => {
-    if(newValue === voteValue){
+  const onHandlerVote = (vote) => {
+    if(vote === voteValue) {
         setVoteValue(0);
-    } else if(newValue === 1) {
+    } else if(vote === 1){
         setVoteValue(1);
-    } else {
-        setVoteValue(-1);
+    }else setVoteValue(-1);
+  };
+  const renderUpVote = () => {
+    if(voteValue === 1) {
+        return (<p>Liked</p>)
     }
-};
-
+  }
+  const renderDownVote = () => {
+    if(voteValue === -1 ){
+        return (<p>Disliked</p>)
+    }
+  }
       const getVoteType = () => {
         if (voteValue === 1) {
           return 'up-vote';
@@ -31,9 +37,9 @@ function PostCard(props) {
             <div className="card">
                 <div className="post-wrapper">
                     <div className="votes-counter">
-                        <button onClick={() => onHandlerVote(1)}>L</button>
+                        <button className={`icon-action-button up-vote ${voteValue===1 && 'active'}`}onClick={() => onHandlerVote(1)}><i class="fa-solid fa-heart"></i></button>
                         <p>{shortenNumber(post.ups,1)}</p>
-                        <button onClick={() => onHandlerVote(-1)}>D</button>
+                        <button className={`icon-action-button down-vote ${voteValue===-1 && 'active'}`} onClick={() => onHandlerVote(-1)}><i class="fa-solid fa-heart-crack"></i></button>
                     </div>
                     <div className="post-container">
                         <h3 className="post-title">{post.title}</h3>
@@ -44,7 +50,7 @@ function PostCard(props) {
                         <div className="post-details grid grid-cols-3">
                             <span className="authorName">{post.author}</span>
                             <span className="Time">{moment.unix(post.created_utc).fromNow()}</span>
-                            <span><button>Comments</button>{shortenNumber(post.num_comments,1)}</span>
+                            <button><span><i class="fa-regular fa-comment"></i> {shortenNumber(post.num_comments,1)}</span></button>
                         </div>
                     </div>
                 </div>
